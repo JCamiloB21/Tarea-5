@@ -13,6 +13,12 @@ double radio[301];
 double vel_obs[301];
 double chi;
 int i;
+double sqrt(double x);
+
+
+float likelihood(double velocidad,double vel_model);
+
+
 int main(void){
     FILE *in;
     int i;
@@ -35,13 +41,18 @@ int main(void){
     }
     fclose(in);
 }
-float likelihood(double vel_model){
+float likelihood(double velocidad,double vel_model){
     double suma=0;
     for(i=0;i<301;i++){
-        suma= suma + (vel_obs[i]-vel_model)*(vel_obs[i]-vel_model);
+        suma= suma + (velocidad-vel_model)*(velocidad-vel_model);
     }
     double chi=(1.0/2.0)*suma;
     return exp(-chi);
 }
+
+float funcion(float rad,float mb, float md, float mh){
+    return (sqrt(mb)*rad)/pow((rad*rad + bb*bb),3/4) + (sqrt(md)*rad)/pow((rad*rad + ((bd+ad)*(bd+ad))),3/4) + (sqrt(mh))/pow((rad*rad + ah*ah),3/4);
+}
+
 
 
