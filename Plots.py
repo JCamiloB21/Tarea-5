@@ -9,16 +9,20 @@ bb=0.2497
 bd=5.16
 ad=9.3105
 ah=64.3
-mb=
-md=
-mh=
-for i in range(len(y)):
-    velocity=(((mb)**(1/2)*y[i])/(y[i]**2 + bb**2)**(3/4)) + (((md)**(1/2)*y[i])/(y[i]**2 + (bd+ad)**2)**(3/4)) + (((mh)**(1/2))/(y[i]**2+ah**2)**(1/4))
+mb=1000
+md=28000
+mh=50
+for i in range(len(x)):
+    a=(mb**(0.5))*x[i]
+    d=(x[i]**2 + bb**2)**(0.75)
+    e=a/d
+    b=((md**(0.5)*x[i]))/(x[i]**2 + (bd+ad)**2)**(0.75)
+    c= mh**(0.5)/(x[i]**2+(ah**2))**(0.25)
+    velocity= e + b + c
     vel.append(velocity)
-    
+    print e
 
 plt.figure()
-plt.scatter(x,y)
-plt.plot(x,vel)
-plt.show()
+plt.plot(x,y)
+plt.plot(x,vel,c="black")
 plt.savefig("montecarlo.png")
