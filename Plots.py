@@ -20,7 +20,6 @@ for i in range(len(x)):
     c= mh**(0.5)/(x[i]**2+(ah**2))**(0.25)
     velocity= e + b + c
     vel.append(velocity)
-    print e
 
 plt.figure()
 plt.plot(x,y)
