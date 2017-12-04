@@ -52,7 +52,7 @@ int main(void){
 }
 double likelihood(double hola[300],double vel_model[300]){
     double suma=0;
-    for(i=0;i<301;i++){
+    for(i=0;i<300;i++){
         suma= suma + pow((hola[i]-vel_model[i]),2);
     }
     double chi=(1.0/2.0)*suma;
@@ -102,7 +102,7 @@ double randn (double mu, double sigma)
 }
 /*el metodo gaussiano se tomo de la pagina https://phoxis.org/2013/05/04/generating-random-numbers-from-normal-distribution-in-c/*/
 void caminata(){
-    int n_interacciones=2000;
+    int n_interacciones=100;
     double suma=0;
     double *y_init=malloc(n_interacciones*sizeof(double));
     double mb_prime;
@@ -150,10 +150,10 @@ void caminata(){
                 l_walk[i+1]=l_prime;
 
             }else{
-                mb_walk[i]= mb_walk[i];
-                md_walk[i]= mb_walk[i];
-                mh_walk[i]= mb_walk[i]; 
-                l_walk[i]= l_init;
+                mb_walk[i+1]= mb_walk[i];
+                md_walk[i+1]= mb_walk[i];
+                mh_walk[i+1]= mb_walk[i]; 
+                l_walk[i+1]= l_init;
             }  
         }
     }
@@ -162,7 +162,7 @@ void caminata(){
     double mejor_mb;
     double mejor_md;
     double mejor_mh;
-    for(i=0;i<2000;i++){
+    for(i=0;i<n_interacciones;i++){
         if(l_walk[i]>val_max){
             val_max=l_walk[i];
             max=i;
