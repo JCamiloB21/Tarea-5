@@ -61,8 +61,14 @@ double likelihood(double hola[300],double vel_model[300]){
 
 double funcion(double chao[300],double mb, double md, double mh){
     double vel;
+    double a;
+    double b;
+    double c;
     for(i=0;i<301;i++){
-        vel= (sqrt(mb)*chao[i])/pow((chao[i]*chao[i] + bb*bb),3/4) + (sqrt(md)*chao[i])/pow((chao[i]*chao[i] + ((bd+ad)*(bd+ad))),3/4) + (sqrt(mh))/pow((chao[i]*chao[i] + ah*ah),3/4);
+        a=(sqrt(mb)*chao[i])/pow((chao[i]*chao[i] + bb*bb),3/4);
+        b=(sqrt(md)*chao[i])/pow((chao[i]*chao[i] + ((bd+ad)*(bd+ad))),3/4);
+        c=sqrt(mh)/pow((chao[i]*chao[i] + ah*ah),1/4);
+        vel= a + b + c;
     }
     return vel;
 }
@@ -131,17 +137,17 @@ void caminata(){
         
         alpha = l_prime/l_init;
         if(alpha>=1.0){
-            mb_walk[i]= mb_prime;
-            md_walk[i]= md_prime;
-            mh_walk[i]= mh_prime; 
-            l_walk[i]=l_prime;
+            mb_walk[i+1]= mb_prime;
+            md_walk[i+1]= md_prime;
+            mh_walk[i+1]= mh_prime; 
+            l_walk[i+1]=l_prime;
         }else{
             beta=drand48();
             if(beta<=alpha){
-                mb_walk[i]= mb_prime;
-                md_walk[i]= md_prime;
-                mh_walk[i]= mh_prime; 
-                l_walk[i]=l_prime;
+                mb_walk[i+1]= mb_prime;
+                md_walk[i+1]= md_prime;
+                mh_walk[i+1]= mh_prime; 
+                l_walk[i+1]=l_prime;
 
             }else{
                 mb_walk[i]= mb_walk[i];
